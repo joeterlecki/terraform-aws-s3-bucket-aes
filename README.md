@@ -39,6 +39,7 @@ _main.tf_
 module "sample-s3-bucket" {
   source            = "git::https://gitlab.com/devinitly/terraform/modules/terraform-aws-s3-bucket.git?ref="
   bucket_name       = var.bucket_name
+  region            = var.region
   versioning_status = var.versioning_status
   environment       = var.environment
   tags              = var.tags
@@ -49,8 +50,9 @@ _terraform.tfvars_
 
 ```hcl
 bucket_name       = "bucket-name"
+region            = "my-region"
 versioning_status = true
-environment        = "my-env"
+evironment        = "my-env"
 tags              = { Key = "value", key = "value" }
 ```
 
@@ -70,6 +72,7 @@ _main.tf_
 module "sample_logging_s3_bucket" {
   source            = "git::https://gitlab.com/devinitly/terraform/modules/terraform-aws-s3-bucket.git?ref="
   bucket_name       = var.bucket_name
+  region            = var.region
   versioning_status = var.versioning_status
   environment       = var.environment
   tags              = var.tags
@@ -80,9 +83,10 @@ _terraform.tfvars_
 
 ```hcl
 bucket_name       = "logging-bucket-name"
+region            = "my-region"
 versioning_status = true
 canned_acl        = "log-delivery-write"
-environment        = "my-env"
+evironment        = "my-env"
 tags              = { Key = "value", key = "value" }
 ```
 
@@ -92,6 +96,7 @@ _main.tf_
 module "sample_s3_bucket" {
   source            = "git::https://gitlab.com/devinitly/terraform/modules/terraform-aws-s3-bucket.git?ref="
   bucket_name       = var.bucket_name
+  region            = var.region
   versioning_status = var.versioning_status
   logging           = { target_bucket = "terraform_remote_state.sample_logging_s3_bucket.outputs.bucket_id", target_prefix = "log/" }
   environment       = var.environment
@@ -103,9 +108,10 @@ _terraform.tfvars_
 
 ```hcl
 bucket_name       = "bucket-name"
+region            = "my-region"
 versioning_status = true
 logging           = { target_bucket = "data.sample_logging_s3_bucket_bucket_name", target_prefix = "log/" }
-environment        = "my-env"
+evironment        = "my-env"
 tags              = { Key = "value", key = "value" }
 ```
 
@@ -114,6 +120,7 @@ tags              = { Key = "value", key = "value" }
 | Name                    | Description                                                       | Type        | Default | Required |
 | ----------------------- | ----------------------------------------------------------------- | ----------- | ------- | -------- |
 | bucket_name             | Desired name for s3 backend state bucket                          | string      | null    | yes      |
+| region                  | Desired region for bucket                                         | string      | null    | yes      |
 | canned_acl              | Desired canned ACL with prefered grants                           | string      | private | yes      |
 | versioning_status       | Desired status for object versioning                              | bool        | false   | no       |
 | attach_bucket_policy    | Set if bucket should have bucket policy attached to it            | bool        | false   | no       |
