@@ -68,7 +68,7 @@ _main.tf_
 
 ```hcl
 module "sample_logging_s3_bucket" {
-  source            = "git::https://gitlab.com/devinitly/terraform/modules/terraform-aws-s3-bucket.git?ref="
+  source            = "git::https://github.com/terraform-aws-iac/terraform-aws-s3-bucket-aes.git?ref=v1.5.1"
   bucket_name       = var.bucket_name
   versioning_status = var.versioning_status
   environment       = var.environment
@@ -90,7 +90,7 @@ _main.tf_
 
 ```hcl
 module "sample_s3_bucket" {
-  source            = "git::https://gitlab.com/devinitly/terraform/modules/terraform-aws-s3-bucket.git?ref="
+  source            = "git::https://github.com/terraform-aws-iac/terraform-aws-s3-bucket-aes.git?ref=v1.5.1"
   bucket_name       = var.bucket_name
   versioning_status = var.versioning_status
   logging           = { target_bucket = "terraform_remote_state.sample_logging_s3_bucket.outputs.bucket_id", target_prefix = "log/" }
